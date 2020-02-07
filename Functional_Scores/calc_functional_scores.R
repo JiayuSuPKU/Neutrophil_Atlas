@@ -1,11 +1,13 @@
-setwd("E:/Aging Neu")
-load("E:/ref_score.RData")
+setwd("path")
+load("./Data.RData")
 
 library(Matrix)
 library(ggplot2)
 library(RColorBrewer)
 library(ggsci)
 library(ComplexHeatmap)
+
+# Color annotation (for ComplexHeatmap)
 ann.color <- list(Cluster = c(G0=pal_npg()(10)[1], 
                               G1=pal_npg()(10)[2], 
                               G2=pal_npg()(10)[3], 
@@ -112,6 +114,7 @@ dev.off()
 ## Part 2: Apoptosis Score
 ## ---------------------------------------------------
 
+# Apoptosis score is pre-calculated in a similar way as scores in Part3
 # Load pre-calculated apoptosis score
 df.apoptosis = data.frame(
   score = ref.merge.neu_all@meta.data[ref.merge.neu_all@meta.data$cluster 
@@ -251,7 +254,7 @@ ggplot(df.nec.group, aes(x=Group, y=prop, fill=Group)) +
 ## Part 4: Granule Scores
 ## ---------------------------------------------------
 
-# Visualization
+# Visualization for granule gene expressions
 genes.used = c("Mpo","Elane","Ctsg","Prtn3","Prss57","Ctsc",
                "Camp","Ltf","Cybb","Cyba","Lcn2","B2m",
                "Mmp8","Mmp9","Hp","Slpi","Itgam",
@@ -452,7 +455,7 @@ cowplot::plot_grid(p1,p2,p3,p4,nrow = 2,align = "hv")
 dev.off()
 
 ## ---------------------------------------------------
-## Part 5: Other figures
+## Part 5: Other figures in the paper
 ## ---------------------------------------------------
 
 ### Fig.S3

@@ -9,7 +9,7 @@ library(ggpubr)
 library(ggsci)
 library(RColorBrewer)
 
-# secretory vesicle scores for all cells
+# Secretory vesicle scores for all cells
 p0 = ggplot(cell.info, aes(x=cluster_condition, y=secretory_vesicle.score, fill=condition)) +
   geom_boxplot(outlier.shape = NA) + 
   labs(title="Secretory Vesicle") + 
@@ -26,10 +26,10 @@ p0 = ggplot(cell.info, aes(x=cluster_condition, y=secretory_vesicle.score, fill=
     plot.title = element_text(size=7, hjust = 0.5)
   )
 
-## functional scores for G1~G5 cells
+## Visualizations of functional scores for G1~G5 cells
 cell.info.G1_5 = subset(cell.info, cell.info$cluster_union != "G0")
 
-# primary granule scores
+# Primary granule scores
 p1 = ggplot(cell.info.G1_5, aes(x=cluster_union, y=Pri.graules.score, fill=condition)) +
   geom_boxplot(notch=TRUE,outlier.shape=NA) + 
   scale_fill_manual(values = c(brewer.pal(9, "Set1")[9], 
@@ -50,7 +50,7 @@ p1 = ggplot(cell.info.G1_5, aes(x=cluster_union, y=Pri.graules.score, fill=condi
                      size = 2,
                      method = "t.test")
 
-# second granule scores
+# Second granule scores
 p2 = ggplot(cell.info.G1_5, aes(x=cluster_union, y=second_granules.score, fill=condition)) +
   geom_boxplot(notch=TRUE,outlier.shape=NA) + 
   scale_fill_manual(values = c(brewer.pal(9, "Set1")[9], 
@@ -71,7 +71,7 @@ p2 = ggplot(cell.info.G1_5, aes(x=cluster_union, y=second_granules.score, fill=c
                      size = 2,
                      method = "t.test")
 
-# tertiary granule scores
+# Tertiary granule scores
 p3 = ggplot(cell.info.G1_5, aes(x=cluster_union, y=tertiary_granules.score, fill=condition)) +
   geom_boxplot(notch=TRUE,outlier.shape=NA) + 
   scale_fill_manual(values = c(brewer.pal(9, "Set1")[9], 
@@ -92,7 +92,7 @@ p3 = ggplot(cell.info.G1_5, aes(x=cluster_union, y=tertiary_granules.score, fill
                      size = 2,
                      method = "t.test")
 
-# secretory vesicle scores
+# Secretory vesicle scores
 p4 = ggplot(cell.info.G1_5, aes(x=cluster_union, y=secretory_vesicle.score, fill=condition)) +
   geom_boxplot(notch=TRUE,outlier.shape=NA) + 
   scale_fill_manual(values = c(brewer.pal(9, "Set1")[9], 
@@ -176,13 +176,13 @@ p7 = ggplot(cell.info.G1_5, aes(x=cluster_union, y=phagocytosis.score, fill=cond
                      size = 2,
                      method = "t.test")
 
-## save figures
+## Save figures
 pdf("path/name.pdf", width = 6.5,height = 2.7)
 cowplot::plot_grid(p1,p2,p3,p4,p5,p,p6,p7,nrow = 2, align = "hv")
 dev.off()
 
-## pie plot for cell proportions
-# pie chart
+## Pie plot for cell proportions
+# Pie chart
 p1 = ggplot(data.frame(table(as.character(cell.info[cell.info$condition == "Control",]$tissue))), aes(x="", y=Freq, fill=Var1)) +
   geom_bar(width = 1, stat = "identity") +
   coord_polar("y", start=0) + 
